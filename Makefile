@@ -6,15 +6,15 @@
 #    By: corellan <corellan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 10:54:50 by corellan          #+#    #+#              #
-#    Updated: 2023/04/18 11:26:50 by corellan         ###   ########.fr        #
+#    Updated: 2023/04/19 16:11:11 by corellan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-SRCS = main.c cub3d_events.c cub3d_key_events.c
+SRCS = main.c cub3d_events.c cub3d_key_events.c check_arguments.c check_map.c
 
-OBJS = main.o cub3d_events.o cub3d_key_events.o
+OBJS = main.o cub3d_events.o cub3d_key_events.o check_arguments.o check_map.o
 
 CC = cc
 
@@ -24,11 +24,14 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 LIBFT = -Llibft -lft
 
-all:	$(NAME)
+all: $(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME): $(OBJS)
 	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS) $(SRCS) $(LIBFT) $(MLX) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+
+%.o: %.c
+		$(CC) $(CFLAGS) -I. -c $< -o $@
 
 clean:
 	$(MAKE) clean -C ./libft 
