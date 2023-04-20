@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/20 14:01:03 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/04/20 14:11:49 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int		destroy(t_cub3d *cub3d);
 int		key_down_event(int keycode, t_cub3d *variables);
 void	put_pixel_in_image(t_cub3d *cub3d, int x, int y, int colour);
 void	initialization(int argc, char **argv, t_cub3d *cub3d);
-void	mlx_initialization(t_cub3d *cub3d);
 int		game_loop(t_cub3d *cub3d);
 void	render_floor_ceiling(t_cub3d *cub3d);
 

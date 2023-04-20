@@ -3,18 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: corellan <corellan@student.42.fr>          +#+  +:+       +#+         #
+#    By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 10:54:50 by corellan          #+#    #+#              #
-#    Updated: 2023/04/18 11:26:50 by corellan         ###   ########.fr        #
+#    Updated: 2023/04/20 14:15:09 by tpoho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-SRCS = main.c cub3d_events.c cub3d_key_events.c
+SRCS = main.c cub3d_events.c cub3d_key_events.c initialization.c game_loop.c \
+		render_functions.c put_pixel_in_image.c
 
-OBJS = main.o cub3d_events.o cub3d_key_events.o
+OBJS = main.o cub3d_events.o cub3d_key_events.o initialization.o game_loop.o \
+		render_functions.o put_pixel_in_image.o
 
 CC = cc
 
