@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:57:56 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/20 14:11:28 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/04/20 19:49:08 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	game_loop(t_cub3d *cub3d)
 {
+	
+	
 	render_floor_ceiling(cub3d);
 
 	if (cub3d->which_image == 0)
