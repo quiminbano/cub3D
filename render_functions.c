@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_key_events.c                                 :+:      :+:    :+:   */
+/*   render_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 11:19:59 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/18 20:02:09 by tpoho            ###   ########.fr       */
+/*   Created: 2023/04/20 13:59:51 by tpoho             #+#    #+#             */
+/*   Updated: 2023/04/20 14:00:42 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_down_event(int key_code, t_cub3d *cub3d)
+void	render_floor_ceiling(t_cub3d *cub3d)
 {
-	// For testing purpose
-	printf("Key code: %d\n", key_code);
+	int	x;
+	int	y;
+	int	upper_half;
 
-	if (key_code == KEY_ESC)
-		destroy((cub3d));
-	return (0);
+	upper_half = HEIGHT_WINDOW / 2;
+	y = 0;
+	while (y < upper_half)
+	{
+		x = 0;
+		while (x < WIDTH_WINDOW)
+		{
+			put_pixel_in_image(cub3d, x, y, cub3d->colour_ceiling);
+			put_pixel_in_image(cub3d, x, (y + upper_half), cub3d->colour_floor);
+			++x;
+		}
+		++y;
+	}
 }

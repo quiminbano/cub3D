@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_key_events.c                                 :+:      :+:    :+:   */
+/*   put_pixel_in_image.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 11:19:59 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/18 20:02:09 by tpoho            ###   ########.fr       */
+/*   Created: 2023/04/20 13:53:16 by tpoho             #+#    #+#             */
+/*   Updated: 2023/04/20 13:56:25 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	key_down_event(int key_code, t_cub3d *cub3d)
+void	put_pixel_in_image(t_cub3d *cub3d, int x, int y, int colour)
 {
-	// For testing purpose
-	printf("Key code: %d\n", key_code);
+	char	*pixel;
 
-	if (key_code == KEY_ESC)
-		destroy((cub3d));
-	return (0);
+	if (x >= 0 && x < WIDTH_WINDOW && y >= 0 && y < HEIGHT_WINDOW)
+	{
+		if (cub3d->which_image == 0)
+			pixel = cub3d->image_1.address;
+		else
+			pixel = cub3d->image_2.address;
+		pixel = pixel + (y * cub3d->image_1.line_length
+				+ (x * (cub3d->image_1.bits_per_pixel / 8)));
+		*(unsigned int *) pixel = colour;
+	}
 }
