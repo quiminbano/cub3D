@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:37:35 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/19 15:25:24 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/20 17:38:05 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main(int ac, char **av)
 
 	if (check_argument(ac, av) == 1)
 		exit (EXIT_FAILURE);
-	if (check_map(av) == 1)
+	if (check_map(av, &(img)) == 1)
 		exit (EXIT_FAILURE);
 	img.mlx = mlx_init();
 	img.mlx_win = mlx_new_window(img.mlx, 800, 600, "cub3D");

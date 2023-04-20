@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 11:22:46 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/19 16:35:55 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:22:37 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,19 @@ void	print_error(int error)
 	else if (error == MANY_ARG)
 		write(STDERR_FILENO, "Too many arguments\n", 19);
 	else if (error == WRONG_FORMAT)
-		write(STDERR_FILENO, "The input file is not an .cub file\n", 35);
+		write(STDERR_FILENO, "The input file is not a .cub file\n", 34);
 	else if (error == INVALID_FILE)
 	{
 		write(STDERR_FILENO, "The file does not have reading permissions", 42);
 		write(STDERR_FILENO, " or the file does not exist\n", 28);
+	}
+	else if (error == TEXTURES_MISSING)
+		write(STDERR_FILENO, "One or more of the wall textures is missing\n", 44);
+	else if (error == WRONG_INPUT)
+		write(STDERR_FILENO, "Invalid map format\n", 19);
+	else if (error == TEXTURES_MISSING)
+	{
+		write(STDERR_FILENO, "The color range to paint the ", 29);
+		write(STDERR_FILENO, "floor or the celling is missing\n", 32);
 	}
 }
