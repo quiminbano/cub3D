@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 11:22:46 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/20 18:22:37 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/21 15:27:10 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ void	print_error(int error)
 		write(STDERR_FILENO, "The color range to paint the ", 29);
 		write(STDERR_FILENO, "floor or the celling is missing\n", 32);
 	}
+	else if (error == TEXTURE_NOT_FOUND)
+		write(STDERR_FILENO, "Error charging textures\n", 24);
 }

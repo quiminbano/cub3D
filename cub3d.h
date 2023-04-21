@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/20 17:41:56 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/21 15:49:25 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define TEXTURES_MISSING 5
 # define WRONG_INPUT 6
 # define FLOOR_CELLING_MISSING 7
+# define TEXTURE_NOT_FOUND 8
 
 typedef struct s_cub3d
 {
@@ -33,13 +34,26 @@ typedef struct s_cub3d
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		idx_no;
+	int		idx_so;
+	int		idx_we;
+	int		idx_ea;
 	int		colour_celling;
 	int		colour_floor;
+	char	*no_path;
+	char	*so_path;
+	char	*ea_path;
+	char	*we_path;
+	void	*ptr_no;
+	void	*ptr_so;
+	void	*ptr_ea;
+	void	*ptr_we;
+	char	**map;
 }			t_cub3d;
 
 void	print_error(int error);
-int		check_map(char **av, t_cub3d *img);
-int		check_textures(char **array);
+int		check_map(char **av, t_cub3d *cub3d);
+int		check_presence_textures(char **array, t_cub3d *cub3d);
 int		check_argument(int ac, char **av);
 int		check_floor_celling(char **array, t_cub3d *img);
 int		check_valid_number(char const *str);
@@ -47,6 +61,7 @@ int		check_is_number(char *str);
 int		ft_find_word_array(char **array, char *needle);
 int		ft_array_len(char **array);
 int		ft_count_space(char *str);
+int		check_textures(char **map, t_cub3d *cub3d);
 int		destroy(t_cub3d *img);
 int		keydownevent(int keycode, t_cub3d *img);
 

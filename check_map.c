@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:25:40 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/20 18:11:08 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:08:38 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,22 @@ static char	**process_array(char ***array)
 	return (process_array_aux(&temp, &(*array), i, j));
 }
 
-static int	check_map_aux(char **doc, t_cub3d *img)
+static int	check_map_aux(char **doc, t_cub3d *cub3d)
 {
-	char	**array;
-
-	array = NULL;
-	array = ft_split((*doc), '\n');
-	array = process_array(&array);
+	cub3d->map = NULL;
+	cub3d->map = ft_split((*doc), '\n');
+	cub3d->map = process_array(&(cub3d->map));
 	free(*doc);
-	if (check_textures(array) == 1 || check_floor_celling(array, &(*img)) == 1)
+	if (check_presence_textures(cub3d->map, &(*cub3d)) == 1 || \
+		check_floor_celling(cub3d->map, &(*cub3d)) == 1)
 	{
-		ft_free_split(array);
+		ft_free_split(cub3d->map);
 		return (1);
 	}
-	ft_free_split(array);
 	return (0);
 }
 
-int	check_map(char **av, t_cub3d *img)
+int	check_map(char **av, t_cub3d *cub3d)
 {
 	int		fd;
 	char	*str;
@@ -96,5 +94,5 @@ int	check_map(char **av, t_cub3d *img)
 		flag = 1;
 	}
 	close(fd);
-	return (check_map_aux(&doc, &(*img)));
+	return (check_map_aux(&doc, &(*cub3d)));
 }

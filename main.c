@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:37:35 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/20 17:38:05 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/21 17:15:11 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,28 @@
 
 int main(int ac, char **av)
 {
-	t_cub3d	img;
+	t_cub3d	cub3d;
 
 	if (check_argument(ac, av) == 1)
 		exit (EXIT_FAILURE);
-	if (check_map(av, &(img)) == 1)
+	if (check_map(av, &(cub3d)) == 1)
 		exit (EXIT_FAILURE);
-	img.mlx = mlx_init();
-	img.mlx_win = mlx_new_window(img.mlx, 800, 600, "cub3D");
-	mlx_hook(img.mlx_win, 2, 0, &keydownevent, &img);
-	mlx_hook(img.mlx_win, 17, 0, &destroy, &img);
-	mlx_loop(img.mlx);
+	cub3d.mlx = mlx_init();
+	if (check_textures(cub3d.map, &cub3d) == 1)
+	{
+		if (cub3d.ptr_no != NULL)
+			mlx_destroy_image(cub3d.mlx, cub3d.ptr_no);
+		if (cub3d.ptr_so != NULL)
+			mlx_destroy_image(cub3d.mlx, cub3d.ptr_so);
+		if (cub3d.ptr_ea != NULL)
+			mlx_destroy_image(cub3d.mlx, cub3d.ptr_ea);
+		if (cub3d.ptr_we != NULL)
+			mlx_destroy_image(cub3d.mlx, cub3d.ptr_we);
+		exit (EXIT_FAILURE);
+	}
+	cub3d.mlx_win = mlx_new_window(cub3d.mlx, 800, 600, "cub3D");
+	mlx_hook(cub3d.mlx_win, 2, 0, &keydownevent, &(cub3d));
+	mlx_hook(cub3d.mlx_win, 17, 0, &destroy, &(cub3d));
+	mlx_loop(cub3d.mlx);
 	return (0);
 }

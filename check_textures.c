@@ -1,36 +1,105 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_textures_celling.c                           :+:      :+:    :+:   */
+/*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 12:51:27 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/20 18:40:20 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/21 17:11:11 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_textures(char **array)
+static int	check_null_or_free(t_cub3d *cub3d, char **map, int flag)
 {
-	int	no;
-	int	so;
-	int	ea;
-	int	we;
+	if ((flag == 1) && (!cub3d->no_path || !cub3d->so_path || \
+		!cub3d->ea_path || !cub3d->we_path))
+	{
+		print_error(WRONG_INPUT);
+		flag = 3;
+		ft_free_split(map);
+		return (1);
+	}
+	if ((flag == 2) && (!cub3d->ptr_no || !cub3d->ptr_so || \
+		!cub3d->ptr_ea || !cub3d->ptr_we))
+	{
+		print_error(TEXTURE_NOT_FOUND);
+		flag = 3;
+		ft_free_split(map);
+		return (1);
+	}
+	if (flag == 3)
+	{
+		free(cub3d->no_path);
+		free(cub3d->so_path);
+		free(cub3d->ea_path);
+		free(cub3d->we_path);
+	}
+	return (0);
+}
+
+char	*get_path_textures(char **map, int idx)
+{
+	char	**temp;
+	char	*str;
+
+	temp = ft_split((map[idx] + 2), ' ');
+	if (temp == NULL)
+		return (NULL);
+	if (temp[0] == NULL || temp[1] != NULL)
+	{
+		ft_free_split(temp);
+		return (NULL);
+	}
+	str = ft_strdup(temp[0]);
+	ft_free_split(temp);
+	return (str);
+}
+
+int	check_textures(char **map, t_cub3d *cub3d)
+{
+	int	width;
+	int	height;
+
+	cub3d->no_path = get_path_textures(map, cub3d->idx_no);
+	cub3d->so_path = get_path_textures(map, cub3d->idx_so);
+	cub3d->ea_path = get_path_textures(map, cub3d->idx_ea);
+	cub3d->we_path = get_path_textures(map, cub3d->idx_we);
+	if (check_null_or_free(&(*cub3d), map, 1) == 1)
+		return (1);
+	cub3d->ptr_no = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->no_path, \
+		&width, &height);
+	cub3d->ptr_so = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->so_path, \
+		&width, &height);
+	cub3d->ptr_ea = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->ea_path, \
+		&width, &height);
+	cub3d->ptr_we = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->we_path, \
+		&width, &height);
+	if (check_null_or_free(&(*cub3d), map, 2) == 1)
+		return (1);
+	check_null_or_free(&(*cub3d), map, 3);
+	return (0);
+}
+
+int	check_presence_textures(char **array, t_cub3d *cub3d)
+{
 	int	len;
 
-	no = ft_find_word_array(array, "NO");
-	so = ft_find_word_array(array, "SO");
-	ea = ft_find_word_array(array, "EA");
-	we = ft_find_word_array(array, "WE");
+	cub3d->idx_no = ft_find_word_array(array, "NO");
+	cub3d->idx_so = ft_find_word_array(array, "SO");
+	cub3d->idx_ea = ft_find_word_array(array, "EA");
+	cub3d->idx_we = ft_find_word_array(array, "WE");
 	len = ft_array_len(array);
-	if (no == len || so == len || ea == len || we == len)
+	if (cub3d->idx_no == len || cub3d->idx_so == len || \
+		cub3d->idx_ea == len || cub3d->idx_we == len)
 	{
 		print_error(TEXTURES_MISSING);
 		return (1);
 	}
-	else if (no > 5 || so > 5 || ea > 5 || we > 5)
+	else if (cub3d->idx_no > 5 || cub3d->idx_so > 5 || cub3d->idx_ea > 5 || \
+		cub3d->idx_we > 5)
 	{
 		print_error(WRONG_INPUT);
 		return (1);
