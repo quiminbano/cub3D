@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:37:35 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/21 17:15:11 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/22 12:16:31 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ int main(int ac, char **av)
 
 	if (check_argument(ac, av) == 1)
 		exit (EXIT_FAILURE);
-	if (check_map(av, &(cub3d)) == 1)
+	if (check_file_map(av, &(cub3d)) == 1)
 		exit (EXIT_FAILURE);
 	cub3d.mlx = mlx_init();
-	if (check_textures(cub3d.map, &cub3d) == 1)
+	cub3d.mlx_win = mlx_new_window(cub3d.mlx, 800, 600, "cub3D");
+	if (check_textures(cub3d.file, &cub3d) == 1)
 	{
 		if (cub3d.ptr_no != NULL)
 			mlx_destroy_image(cub3d.mlx, cub3d.ptr_no);
@@ -33,7 +34,6 @@ int main(int ac, char **av)
 			mlx_destroy_image(cub3d.mlx, cub3d.ptr_we);
 		exit (EXIT_FAILURE);
 	}
-	cub3d.mlx_win = mlx_new_window(cub3d.mlx, 800, 600, "cub3D");
 	mlx_hook(cub3d.mlx_win, 2, 0, &keydownevent, &(cub3d));
 	mlx_hook(cub3d.mlx_win, 17, 0, &destroy, &(cub3d));
 	mlx_loop(cub3d.mlx);

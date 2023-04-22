@@ -6,28 +6,28 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 12:51:27 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/21 17:11:11 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/22 12:00:38 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_null_or_free(t_cub3d *cub3d, char **map, int flag)
+static int	check_null_or_free(t_cub3d *cub3d, char **file, int flag)
 {
 	if ((flag == 1) && (!cub3d->no_path || !cub3d->so_path || \
 		!cub3d->ea_path || !cub3d->we_path))
 	{
 		print_error(WRONG_INPUT);
-		flag = 3;
-		ft_free_split(map);
+		ft_free_split(file);
+		check_null_or_free(&(*cub3d), file, 3);
 		return (1);
 	}
 	if ((flag == 2) && (!cub3d->ptr_no || !cub3d->ptr_so || \
 		!cub3d->ptr_ea || !cub3d->ptr_we))
 	{
 		print_error(TEXTURE_NOT_FOUND);
-		flag = 3;
-		ft_free_split(map);
+		ft_free_split(file);
+		check_null_or_free(&(*cub3d), file, 3);
 		return (1);
 	}
 	if (flag == 3)
@@ -40,12 +40,12 @@ static int	check_null_or_free(t_cub3d *cub3d, char **map, int flag)
 	return (0);
 }
 
-char	*get_path_textures(char **map, int idx)
+static char	*get_path_textures(char **file, int idx)
 {
 	char	**temp;
 	char	*str;
 
-	temp = ft_split((map[idx] + 2), ' ');
+	temp = ft_split((file[idx] + 2), ' ');
 	if (temp == NULL)
 		return (NULL);
 	if (temp[0] == NULL || temp[1] != NULL)
@@ -58,16 +58,16 @@ char	*get_path_textures(char **map, int idx)
 	return (str);
 }
 
-int	check_textures(char **map, t_cub3d *cub3d)
+int	check_textures(char **file, t_cub3d *cub3d)
 {
 	int	width;
 	int	height;
 
-	cub3d->no_path = get_path_textures(map, cub3d->idx_no);
-	cub3d->so_path = get_path_textures(map, cub3d->idx_so);
-	cub3d->ea_path = get_path_textures(map, cub3d->idx_ea);
-	cub3d->we_path = get_path_textures(map, cub3d->idx_we);
-	if (check_null_or_free(&(*cub3d), map, 1) == 1)
+	cub3d->no_path = get_path_textures(file, cub3d->idx_no);
+	cub3d->so_path = get_path_textures(file, cub3d->idx_so);
+	cub3d->ea_path = get_path_textures(file, cub3d->idx_ea);
+	cub3d->we_path = get_path_textures(file, cub3d->idx_we);
+	if (check_null_or_free(&(*cub3d), file, 1) == 1)
 		return (1);
 	cub3d->ptr_no = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->no_path, \
 		&width, &height);
@@ -77,9 +77,9 @@ int	check_textures(char **map, t_cub3d *cub3d)
 		&width, &height);
 	cub3d->ptr_we = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->we_path, \
 		&width, &height);
-	if (check_null_or_free(&(*cub3d), map, 2) == 1)
+	if (check_null_or_free(&(*cub3d), file, 2) == 1)
 		return (1);
-	check_null_or_free(&(*cub3d), map, 3);
+	check_null_or_free(&(*cub3d), file, 3);
 	return (0);
 }
 

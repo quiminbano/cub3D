@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/21 15:49:25 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:29:25 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define WRONG_INPUT 6
 # define FLOOR_CELLING_MISSING 7
 # define TEXTURE_NOT_FOUND 8
+# define NO_MAP 9
+# define INVALID_MAP 10
 
 typedef struct s_cub3d
 {
@@ -48,20 +50,22 @@ typedef struct s_cub3d
 	void	*ptr_so;
 	void	*ptr_ea;
 	void	*ptr_we;
+	char	**file;
 	char	**map;
 }			t_cub3d;
 
 void	print_error(int error);
-int		check_map(char **av, t_cub3d *cub3d);
+int		check_file_map(char **av, t_cub3d *cub3d);
 int		check_presence_textures(char **array, t_cub3d *cub3d);
 int		check_argument(int ac, char **av);
 int		check_floor_celling(char **array, t_cub3d *img);
 int		check_valid_number(char const *str);
 int		check_is_number(char *str);
+int		check_map(char **map);
 int		ft_find_word_array(char **array, char *needle);
 int		ft_array_len(char **array);
 int		ft_count_space(char *str);
-int		check_textures(char **map, t_cub3d *cub3d);
+int		check_textures(char **file, t_cub3d *cub3d);
 int		destroy(t_cub3d *img);
 int		keydownevent(int keycode, t_cub3d *img);
 

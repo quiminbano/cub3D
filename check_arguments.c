@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 11:22:46 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/21 15:27:10 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/22 12:34:04 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ int	check_argument(int ac, char **av)
 	return (0);
 }
 
+static void	print_error_aux(int error)
+{
+	if (error == NO_MAP)
+		write(STDERR_FILENO, "No map in the file\n", 19);
+	else if (error == INVALID_MAP)
+		write(STDERR_FILENO, "Invalid map\n", 12);
+}
+
 void	print_error(int error)
 {
 	write(STDERR_FILENO, "Error\n", 6);
@@ -62,4 +70,5 @@ void	print_error(int error)
 	}
 	else if (error == TEXTURE_NOT_FOUND)
 		write(STDERR_FILENO, "Error charging textures\n", 24);
+	print_error_aux(error);
 }
