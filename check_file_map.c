@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:25:40 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/22 17:29:57 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:33:30 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ static int	get_map(t_cub3d *cub3d)
 	temp = ((cub3d->file) + 6);
 	len = ft_array_len(temp);
 	cub3d->map = (char **)malloc(sizeof(char *) * (len + 1));
-	if (cub3d->map == NULL || cub3d->map[0] == NULL)
-	{
-		print_error(NO_MAP);
+	if (cub3d->map == NULL)
 		return (1);
-	}
 	cub3d->map[len] = NULL;
 	if (len < 3)
 	{
-		print_error(INVALID_MAP);
+		if (len < 3 && len > 0)
+			print_error(INVALID_MAP);
+		else if (len == 0)
+			print_error(NO_MAP);
 		return (1);
 	}
 	while (i < len)

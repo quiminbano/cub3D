@@ -6,13 +6,13 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/22 17:29:25 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:21:39 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include <mlx.h>
+# include "mlx/mlx.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include "libft/libft.h"
