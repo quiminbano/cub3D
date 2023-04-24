@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 11:16:40 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/22 17:29:12 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/24 11:18:25 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,7 @@ int	check_map(char **map)
 		}
 		i++;
 	}
+	if (check_mases(map) == 1)
+		return (1);
 	return (0);
 }
