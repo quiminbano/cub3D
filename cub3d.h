@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/24 20:17:14 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/04/25 20:54:35 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define EMPTY_SQUARE 0
 # define WALL_SQUARE 1
 
-# define MOVEMENT_SPEED 0.16
-# define TURNING_SPEED 0.10
+# define MOVEMENT_SPEED 0.05
+# define TURNING_SPEED 0.03
 
 # define KEY_ESC 53
 # define PLAYER_COLLISION_DISTANCE 0.01 
@@ -102,11 +102,22 @@ typedef struct s_cub3d
 	char			**map_2d_array;
 	int				width_map;
 	int				height_map;
-}			t_cub3d;	
+	int				put_pixel_in_image_temp;
+	int				key_w_down;
+	int				key_a_down;
+	int				key_s_down;
+	int				key_d_down;
+	int				key_arrow_up_down;
+	int				key_arrow_down_down;
+	int				key_arrow_left_down;
+	int				key_arrow_right_down;	
+}			t_cub3d;
 
 int		destroy(t_cub3d *cub3d);
 int		key_down_event(int keycode, t_cub3d *variables);
+int		key_up_event(int key_code, t_cub3d *cub3d);
 void	put_pixel_in_image(t_cub3d *cub3d, int x, int y, int colour);
+void	put_pixel_in_image_2(t_cub3d *cub3d, int x, int y, int y2, int colour);
 void	initialization(int argc, char **argv, t_cub3d *cub3d);
 int		game_loop(t_cub3d *cub3d);
 void	render_floor_ceiling(t_cub3d *cub3d);

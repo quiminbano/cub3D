@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:55:11 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/24 20:35:28 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/04/25 20:41:42 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static void	mlx_initialization(t_cub3d *cub3d)
 	cub3d->image_2.address = mlx_get_data_addr(cub3d->image_2.image,
 			&cub3d->image_2.bits_per_pixel, &cub3d->image_2.line_length,
 			&cub3d->image_2.endianness);
+	cub3d->put_pixel_in_image_temp = cub3d->image_1.bits_per_pixel / 8;
 	mlx_loop_hook(cub3d->mlx.mlx, &game_loop, &cub3d->mlx);
 	mlx_hook(cub3d->mlx.mlx_window, 2, 0, &key_down_event, &cub3d->mlx);
+	mlx_hook(cub3d->mlx.mlx_window, 3, 0, &key_up_event, &cub3d->mlx);
 	mlx_hook(cub3d->mlx.mlx_window, 17, 0, &destroy, &cub3d->mlx);
 	mlx_loop(cub3d->mlx.mlx);
 }
@@ -61,13 +63,11 @@ void	initialize_map(t_cub3d *cub3d)
 	{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 
-	printf("begin\n");
 	cub3d->map_2d_array = malloc(sizeof(int *) * 24);
 	for (int x = 0; x < 24; ++x)
 	{
 		cub3d->map_2d_array[x] = malloc(sizeof(int) * 24);
 	}
-	printf("middle\n");
 	for (int i = 0; i < 24; ++i)
 	{
 		for (int k = 0; k < 24; ++k)
@@ -119,6 +119,15 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->camera_plane_y = 0.66;
 	cub3d->height_map = 24;
 	cub3d->width_map = 24;
+
+	cub3d->key_w_down = 0;
+	cub3d->key_a_down = 0;
+	cub3d->key_s_down = 0;
+	cub3d->key_d_down = 0;
+	cub3d->key_arrow_up_down = 0;
+	cub3d->key_arrow_down_down = 0;
+	cub3d->key_arrow_left_down = 0;
+	cub3d->key_arrow_right_down = 0;
 
 	initialize_map(cub3d);
 	mlx_initialization(cub3d);

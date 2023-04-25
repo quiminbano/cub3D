@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:57:56 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/24 20:37:40 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/04/25 21:03:50 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,47 +133,96 @@ void	render_walls(t_cub3d *cub3d)
 
 		//draw the pixels of the stripe as a vertical line
 		//verLine(x, drawStart, drawEnd, color);
+		
 		y_coord = cub3d->render_walls.draw_limit_low;
-		while (y_coord <= cub3d->render_walls.draw_limit_high)
-		{
-			if(cub3d->render_walls.which_side_hit == 1)
+		/*
+		if(cub3d->render_walls.which_side_hit == 1)
+			while (y_coord <= cub3d->render_walls.draw_limit_high)
+			{
 				put_pixel_in_image(cub3d, x_coord, y_coord, cub3d->colour_wall2);
-			else
+				++y_coord;
+			}
+		else
+		{
+			while (y_coord <= cub3d->render_walls.draw_limit_high)
+			{
 				put_pixel_in_image(cub3d, x_coord,  y_coord, cub3d->colour_wall);
-			++y_coord;
+				++y_coord;
+			}
+		}
+		*/
+		if(cub3d->render_walls.which_side_hit == 1)
+		{
+			put_pixel_in_image_2(cub3d, x_coord, y_coord, cub3d->render_walls.draw_limit_high, cub3d->colour_wall2);
+		}
+		else
+		{
+			put_pixel_in_image_2(cub3d, x_coord, y_coord, cub3d->render_walls.draw_limit_high, cub3d->colour_wall);
 		}
 	++x_coord;
 	}
 }
 
+void	move_character(t_cub3d *cub3d)
+{
+	double	temp_direction_x;
+	double	temp_camera_plane_x;
+
+
+	if (cub3d->key_w_down == 1)
+	{
+		if(cub3d->map_2d_array[(int)(cub3d->player_position_x + cub3d->player_direction_x * MOVEMENT_SPEED)][(int)(cub3d->player_position_y )] == 0)
+			cub3d->player_position_x += cub3d->player_direction_x * MOVEMENT_SPEED;
+      	if(cub3d->map_2d_array[(int)(cub3d->player_position_x)]
+			[(int)(cub3d->player_position_y + cub3d->player_direction_y * MOVEMENT_SPEED)] == 0)
+			cub3d->player_position_y += cub3d->player_direction_y * MOVEMENT_SPEED;
+	}
+	if (cub3d->key_s_down == 1)
+	{
+		if(cub3d->map_2d_array[(int)(cub3d->player_position_x - cub3d->player_direction_x * MOVEMENT_SPEED)][(int)(cub3d->player_position_y)] == 0)
+			cub3d->player_position_x -= cub3d->player_direction_x * MOVEMENT_SPEED;
+      	if(cub3d->map_2d_array[(int)(cub3d->player_position_x)]
+			[(int)(cub3d->player_position_y - cub3d->player_direction_y * MOVEMENT_SPEED)] == 0)
+			cub3d->player_position_y -= cub3d->player_direction_y * MOVEMENT_SPEED;
+	}
+	if (cub3d->key_arrow_right_down == 1)
+	{
+		temp_direction_x = cub3d->player_direction_x;
+		cub3d->player_direction_x = cub3d->player_direction_x * cos(-TURNING_SPEED) - cub3d->player_direction_y * sin(-TURNING_SPEED);
+		cub3d->player_direction_y = temp_direction_x * sin(-TURNING_SPEED) + cub3d->player_direction_y * cos(-TURNING_SPEED);
+      	temp_camera_plane_x = cub3d->camera_plane_x;
+		cub3d->camera_plane_x = cub3d->camera_plane_x * cos(-TURNING_SPEED) - cub3d->camera_plane_y * sin(-TURNING_SPEED);
+		cub3d->camera_plane_y = temp_camera_plane_x * sin(-TURNING_SPEED) + cub3d->camera_plane_y * cos(-TURNING_SPEED);
+	}
+}
 
 int	game_loop(t_cub3d *cub3d)
 {
-  render_floor_ceiling(cub3d);
-  render_walls(cub3d);
+	move_character(cub3d);
+	render_floor_ceiling(cub3d);
+	render_walls(cub3d);
 
+	if (cub3d->which_image == 0)
+		mlx_put_image_to_window(cub3d->mlx.mlx,
+			cub3d->mlx.mlx_window, cub3d->image_1.image, 0, 0);
+	else
+		mlx_put_image_to_window(cub3d->mlx.mlx,
+			cub3d->mlx.mlx_window, cub3d->image_2.image, 0, 0);
 
-  if (cub3d->which_image == 0)
-	mlx_put_image_to_window(cub3d->mlx.mlx,
-	  cub3d->mlx.mlx_window, cub3d->image_1.image, 0, 0);
-  else
-	mlx_put_image_to_window(cub3d->mlx.mlx,
-	  cub3d->mlx.mlx_window, cub3d->image_2.image, 0, 0);
+	// Test flickering warning epilepsy 
+	/*
+	if (cub3d->which_image == 1)
+	{
+		cub3d->colour_ceiling = 0x000000FF; // Blue
+		cub3d->colour_floor = 0x0000FF00; // Green
+	}
+	if (cub3d->which_image == 0)
+	{
+		cub3d->colour_ceiling = 0x0000FF00; // Green
+		cub3d->colour_floor = 0x00FF0000; // RED
+	}
+	*/
   
-  // Test flickering warning epilepsy 
-  /*
-  if (cub3d->which_image == 1)
-  {
-	cub3d->colour_ceiling = 0x000000FF; // Blue
-	cub3d->colour_floor = 0x0000FF00; // Green
-  }
-  if (cub3d->which_image == 0)
-  {
-	cub3d->colour_ceiling = 0x0000FF00; // Green
-	cub3d->colour_floor = 0x00FF0000; // RED
-  }
-  */
-  
-  cub3d->which_image = (cub3d->which_image + 1) % 2; // image change 0 -> 1 and 1 -> 0
-  return (0);
+	cub3d->which_image = (cub3d->which_image + 1) % 2; // image change 0 -> 1 and 1 -> 0
+	return (0);
 }
