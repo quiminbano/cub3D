@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/24 15:24:50 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/26 19:45:27 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ typedef struct s_cub3d
 	char	**map;
 }			t_cub3d;
 
+typedef struct	s_coord
+{
+	int	row;
+	int	col;
+	int	i_row;
+	int	j_col;
+	int	i;
+	int	j;
+}				t_coord;
+
 void	print_error(int error);
 int		check_file_map(char **av, t_cub3d *cub3d);
 int		check_presence_textures(char **array, t_cub3d *cub3d);
@@ -62,12 +72,15 @@ int		check_floor_celling(char **array, t_cub3d *img);
 int		check_valid_number(char const *str);
 int		check_is_number(char *str);
 int		check_map(char **map);
-int		check_mases(char **map);
+int		check_mases(char **map, int flag);
 int		ft_find_word_array(char **array, char *needle);
 int		ft_array_len(char **array);
 int		ft_count_space(char *str);
 int		check_textures(char **file, t_cub3d *cub3d);
 int		destroy(t_cub3d *img);
 int		keydownevent(int keycode, t_cub3d *img);
+int		longest_length(char **map);
+int		error_free(char **array, int i);
+int		check_after_flood_fill(char ***map);
 
 #endif
