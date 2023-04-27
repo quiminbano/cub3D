@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:13:19 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/18 11:15:10 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/18 20:02:11 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	destroy(t_cub3d *img)
+int	destroy(t_cub3d *cub3d)
 {
-	mlx_destroy_window(img->mlx, img->mlx_win);
-	img->mlx = NULL;
-	img->mlx_win = NULL;
+	mlx_destroy_window(cub3d->mlx.mlx, cub3d->mlx.mlx_window);
+	cub3d->mlx.mlx = NULL;
+	cub3d->mlx.mlx_window = NULL;
 	exit(0);
 }
