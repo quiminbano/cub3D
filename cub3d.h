@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 14:36:33 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 18:09:43 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ typedef struct s_cub3d
 	double			player_direction_y;
 	double			camera_plane_x;
 	double			camera_plane_y;
-	char			**map_2d_array;
+	char			**map;
+	int				**map_int;
 	int				width_map;
 	int				height_map;
 	int				put_pixel_in_image_temp;
@@ -122,24 +123,21 @@ typedef struct s_cub3d
 	int				key_arrow_down_down;
 	int				key_arrow_left_down;
 	int				key_arrow_right_down;	
-  int		fd;
-	char	***av_addr;
-  int		idx_no;
-	int		idx_so;
-	int		idx_we;
-	int		idx_ea;
-	int		colour_celling;
-	int		colour_floor;
-	char	*no_path;
-	char	*so_path;
-	char	*ea_path;
-	char	*we_path;
-	void	*ptr_no;
-	void	*ptr_so;
-	void	*ptr_ea;
-	void	*ptr_we;
-	char	**file;
-	char	**map;
+	int				fd;
+	char			***av_addr;
+  	int				idx_no;
+	int				idx_so;
+	int				idx_we;
+	int				idx_ea;
+	char			*no_path;
+	char			*so_path;
+	char			*ea_path;
+	char			*we_path;
+	void			*ptr_no;
+	void			*ptr_so;
+	void			*ptr_ea;
+	void			*ptr_we;
+	char			**file;
 }			t_cub3d;
 
 typedef struct s_coord
@@ -184,7 +182,7 @@ void	print_error(int error);
 int		check_file_map(char **av, t_cub3d *cub3d);
 int		check_presence_textures(char **array, t_cub3d *cub3d);
 int		check_argument(int ac, char **av);
-int		check_floor_celling(char **array, t_cub3d *img);
+int		check_floor_ceiling(char **array, t_cub3d *img);
 int		check_valid_number(char const *str);
 int		check_is_number(char *str);
 int		check_map(char **map, t_cub3d *cub3d);
@@ -197,5 +195,7 @@ int		check_textures(char **file, t_cub3d *cub3d);
 int		longest_length(char **map);
 int		error_free(char **array, int i);
 int		check_after_flood_fill(char ***map);
+void	create_int_map(t_cub3d *cub3d);
+int		error_free_int(int **array, int i);
 
 #endif

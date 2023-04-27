@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:55:11 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/27 15:42:52 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/04/27 19:52:29 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void	mlx_initialization(t_cub3d *cub3d)
 {
-	cub3d->mlx.mlx = mlx_init();
-	cub3d->mlx.mlx_window = mlx_new_window(cub3d->mlx.mlx,
-			WIDTH_WINDOW, HEIGHT_WINDOW, "cub3D");
 	cub3d->image_1.image = mlx_new_image(cub3d->mlx.mlx,
 			WIDTH_WINDOW, HEIGHT_WINDOW);
 	cub3d->image_1.address = mlx_get_data_addr(cub3d->image_1.image,
@@ -35,52 +32,34 @@ static void	mlx_initialization(t_cub3d *cub3d)
 	mlx_loop(cub3d->mlx.mlx);
 }
 
-void	initialize_map(t_cub3d *cub3d)
+static void map_initialization(int ac, char **av, t_cub3d *cub3d)
 {
-	int	map[24][24] = {
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-	{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-
-	cub3d->map_2d_array = malloc(sizeof(int *) * 24);
-	for (int x = 0; x < 24; ++x)
+	if (check_argument(ac, av) == 1)
+		exit (EXIT_FAILURE);
+	if (check_file_map(av, cub3d) == 1)
+		exit (EXIT_FAILURE);
+	cub3d->mlx.mlx = mlx_init();
+	cub3d->mlx.mlx_window = mlx_new_window(cub3d->mlx.mlx,
+			WIDTH_WINDOW, HEIGHT_WINDOW, "cub3D");
+	if (check_textures(cub3d->file, &(*cub3d)) == 1)
 	{
-		cub3d->map_2d_array[x] = malloc(sizeof(int) * 24);
+		if (cub3d->ptr_no != NULL)
+			mlx_destroy_image(cub3d->mlx.mlx, cub3d->ptr_no);
+		if (cub3d->ptr_so != NULL)
+			mlx_destroy_image(cub3d->mlx.mlx, cub3d->ptr_so);
+		if (cub3d->ptr_ea != NULL)
+			mlx_destroy_image(cub3d->mlx.mlx, cub3d->ptr_ea);
+		if (cub3d->ptr_we != NULL)
+			mlx_destroy_image(cub3d->mlx.mlx, cub3d->ptr_we);
+		exit (EXIT_FAILURE);
 	}
-	for (int i = 0; i < 24; ++i)
-	{
-		for (int k = 0; k < 24; ++k)
-		{
-			cub3d->map_2d_array[i][k] = map[i][k];
-		}
-	}
+	create_int_map(cub3d);
 }
 
 void	initialization(int argc, char **argv, t_cub3d *cub3d)
 {
-	(void) argc;
-	(void) argv;
+	printf("Begin Initialization\n");
+	map_initialization(argc, argv, &(*cub3d));
 	cub3d->which_image = 0;
 	cub3d->colour_ceiling = 0x000000FF;
 	cub3d->colour_floor = 0x0000FF00;
@@ -103,14 +82,14 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->render_walls.wall_height = 0;
 	cub3d->render_walls.draw_limit_low = 0;
 	cub3d->render_walls.draw_limit_high = 0;
-	cub3d->player_position_x = 22;
-	cub3d->player_position_y = 12;
+	cub3d->player_position_x = 2.5;
+	cub3d->player_position_y = 2.5;
 	cub3d->player_direction_x = -1;
 	cub3d->player_direction_y = 0;
 	cub3d->camera_plane_x = 0;
 	cub3d->camera_plane_y = 0.66;
-	cub3d->height_map = 24;
-	cub3d->width_map = 24;
+	//cub3d->height_map = 24;
+	//cub3d->width_map = 24;
 	cub3d->key_w_down = 0;
 	cub3d->key_a_down = 0;
 	cub3d->key_s_down = 0;
@@ -119,6 +98,18 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->key_arrow_down_down = 0;
 	cub3d->key_arrow_left_down = 0;
 	cub3d->key_arrow_right_down = 0;
-	initialize_map(cub3d);
+	int i = 0;
+	int j = 0;
+	while (i < cub3d->height_map)
+	{
+		j = 0;
+		while (j < cub3d->width_map)
+		{
+			printf("%d", cub3d->map_int[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 	mlx_initialization(cub3d);
 }

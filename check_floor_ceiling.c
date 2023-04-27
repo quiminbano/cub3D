@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_floor_celling.c                              :+:      :+:    :+:   */
+/*   check_floor_ceiling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 18:40:31 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 13:37:59 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:37:49 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static int	check_parameters(char **array, int *colour)
 	return (play_with_bits(i, flag, &(*colour), array));
 }
 
-static int	check_floor_celling_aux(char **array, int c, int f, t_cub3d *img)
+static int	check_floor_ceiling_aux(char **array, int c, int f, \
+	t_cub3d *cub3d)
 {
 	char	**celling;
 	char	**floor;
@@ -67,14 +68,14 @@ static int	check_floor_celling_aux(char **array, int c, int f, t_cub3d *img)
 			ft_free_split(celling);
 		return (1);
 	}
-	if (check_parameters(celling, &(img->colour_celling)) == 1)
+	if (check_parameters(celling, &(cub3d->colour_ceiling)) == 1)
 		return (1);
-	if (check_parameters(floor, &(img->colour_floor)) == 1)
+	if (check_parameters(floor, &(cub3d->colour_floor)) == 1)
 		return (1);
 	return (0);
 }
 
-int	check_floor_celling(char **array, t_cub3d *img)
+int	check_floor_ceiling(char **array, t_cub3d *img)
 {
 	int	c;
 	int	f;
@@ -93,5 +94,5 @@ int	check_floor_celling(char **array, t_cub3d *img)
 		print_error(WRONG_INPUT);
 		return (1);
 	}
-	return (check_floor_celling_aux(array, c, f, &(*img)));
+	return (check_floor_ceiling_aux(array, c, f, &(*img)));
 }

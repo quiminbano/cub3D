@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 12:51:27 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/22 12:00:38 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:33:34 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,28 +58,28 @@ static char	*get_path_textures(char **file, int idx)
 	return (str);
 }
 
-int	check_textures(char **file, t_cub3d *cub3d)
+int	check_textures(char **file, t_cub3d *cub)
 {
 	int	width;
 	int	height;
 
-	cub3d->no_path = get_path_textures(file, cub3d->idx_no);
-	cub3d->so_path = get_path_textures(file, cub3d->idx_so);
-	cub3d->ea_path = get_path_textures(file, cub3d->idx_ea);
-	cub3d->we_path = get_path_textures(file, cub3d->idx_we);
-	if (check_null_or_free(&(*cub3d), file, 1) == 1)
+	cub->no_path = get_path_textures(file, cub->idx_no);
+	cub->so_path = get_path_textures(file, cub->idx_so);
+	cub->ea_path = get_path_textures(file, cub->idx_ea);
+	cub->we_path = get_path_textures(file, cub->idx_we);
+	if (check_null_or_free(cub, file, 1) == 1)
 		return (1);
-	cub3d->ptr_no = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->no_path, \
+	cub->ptr_no = mlx_xpm_file_to_image(cub->mlx.mlx_window, cub->no_path, \
 		&width, &height);
-	cub3d->ptr_so = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->so_path, \
+	cub->ptr_so = mlx_xpm_file_to_image(cub->mlx.mlx_window, cub->so_path, \
 		&width, &height);
-	cub3d->ptr_ea = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->ea_path, \
+	cub->ptr_ea = mlx_xpm_file_to_image(cub->mlx.mlx_window, cub->ea_path, \
 		&width, &height);
-	cub3d->ptr_we = mlx_xpm_file_to_image(cub3d->mlx_win, cub3d->we_path, \
+	cub->ptr_we = mlx_xpm_file_to_image(cub->mlx.mlx_window, cub->we_path, \
 		&width, &height);
-	if (check_null_or_free(&(*cub3d), file, 2) == 1)
+	if (check_null_or_free(&(*cub), file, 2) == 1)
 		return (1);
-	check_null_or_free(&(*cub3d), file, 3);
+	check_null_or_free(&(*cub), file, 3);
 	return (0);
 }
 

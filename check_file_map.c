@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:25:40 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 14:54:09 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 16:37:29 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	check_file_map_aux(char **doc, t_cub3d *cub3d)
 	cub3d->file = process_array(&(cub3d->file));
 	free(*doc);
 	if (check_presence_textures(cub3d->file, &(*cub3d)) == 1 || \
-		check_floor_celling(cub3d->file, &(*cub3d)) == 1)
+		check_floor_ceiling(cub3d->file, &(*cub3d)) == 1)
 	{
 		ft_free_split(cub3d->file);
 		return (1);
