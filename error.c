@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freesplit.c                                     :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 10:13:18 by corellan          #+#    #+#             */
-/*   Updated: 2023/01/28 10:13:54 by corellan         ###   ########.fr       */
+/*   Created: 2023/04/26 17:57:16 by corellan          #+#    #+#             */
+/*   Updated: 2023/04/26 17:57:46 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-void	ft_free_split(char **str)
+int	error_free(char **array, int i)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != NULL)
+	while (i > 0)
 	{
-		free(str[i]);
-		i++;
+		free(array[i--]);
+		array[i] = NULL;
 	}
-	if (str[i] != NULL)
-		free(str[i]);
-	if (str != NULL)
-		free(str);
+	free(array);
+	return (1);
 }

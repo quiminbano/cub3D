@@ -6,7 +6,7 @@
 #    By: corellan <corellan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/01 12:00:04 by corellan          #+#    #+#              #
-#    Updated: 2023/01/28 10:16:47 by corellan         ###   ########.fr        #
+#    Updated: 2023/04/20 17:15:16 by corellan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
 ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
 ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c \
-ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_freesplit.c
+ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_free_split.c
 
 OUT = ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o ft_isascii.o \
 ft_isdigit.o ft_isprint.o ft_itoa.o ft_memchr.o ft_memcmp.o ft_memcpy.o \
@@ -28,7 +28,7 @@ ft_putstr_fd.o ft_split.o ft_strchr.o ft_strdup.o ft_striteri.o ft_strjoin.o \
 ft_strlcat.o ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o \
 ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o ft_toupper.o \
 ft_lstadd_back.o ft_lstadd_front.o ft_lstclear.o ft_lstdelone.o ft_lstiter.o \
-ft_lstlast.o ft_lstmap.o ft_lstnew.o ft_lstsize.o ft_freesplit.o
+ft_lstlast.o ft_lstmap.o ft_lstnew.o ft_lstsize.o ft_free_split.o
 
 GNL_DIR = get_next_line
 
