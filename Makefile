@@ -6,7 +6,7 @@
 #    By: corellan <corellan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 10:54:50 by corellan          #+#    #+#              #
-#    Updated: 2023/04/26 19:22:24 by corellan         ###   ########.fr        #
+#    Updated: 2023/04/27 14:58:12 by corellan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-MLX = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MLX = -lmlx -framework OpenGL -framework AppKit
 
 LIBFT = -Llibft -lft
 
@@ -32,15 +32,13 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./libft
-	$(MAKE) -C ./mlx
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 
 %.o: %.c
-		$(CC) $(CFLAGS) -I. -Imlx -c $< -o $@
+		$(CC) $(CFLAGS) -I. -c $< -o $@
 
 clean:
 	$(MAKE) clean -C ./libft
-	$(MAKE) clean -C ./mlx 
 	rm -f $(OBJS)
 
 fclean:	clean

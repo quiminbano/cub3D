@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:25:40 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 13:37:43 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:54:09 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static int	check_file_map_aux(char **doc, t_cub3d *cub3d)
 		ft_free_split(cub3d->map);
 		return (1);
 	}
-	if (check_map(cub3d->map) == 1)
+	if (check_map(cub3d->map, &(*cub3d)) == 1)
 	{
 		ft_free_split(cub3d->file);
 		ft_free_split(cub3d->map);
@@ -111,14 +111,14 @@ static int	check_file_map_aux(char **doc, t_cub3d *cub3d)
 
 int	check_file_map(char **av, t_cub3d *cub3d)
 {
-	int		fd;
 	char	*str;
 	char	*doc;
 	int		flag;
 
-	fd = open(av[1], O_RDONLY);
+	cub3d->fd = open(av[1], O_RDONLY);
 	flag = 0;
-	if (fd == -1)
+	cub3d->av_addr = &av;
+	if (cub3d->fd == -1)
 	{
 		print_error(INVALID_FILE);
 		return (1);
@@ -127,13 +127,13 @@ int	check_file_map(char **av, t_cub3d *cub3d)
 	while (str != NULL)
 	{
 		free(str);
-		str = get_next_line(fd);
+		str = get_next_line(cub3d->fd);
 		if (flag == 0)
 			doc = ft_strdup("");
 		if (str != NULL)
 			doc = ft_strjoin_free(doc, str);
 		flag = 1;
 	}
-	close(fd);
+	close(cub3d->fd);
 	return (check_file_map_aux(&doc, &(*cub3d)));
 }

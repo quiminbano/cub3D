@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 11:16:40 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 13:38:08 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:36:36 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ static int	first_and_last(char *str)
 	return (0);
 }
 
-int	check_map(char **map)
+int	check_map(char **map, t_cub3d *cub3d)
 {
 	int	len;
 	int	flag;
@@ -129,7 +129,7 @@ int	check_map(char **map)
 		}
 		i++;
 	}
-	if (check_mases(map, flag) == 1)
+	if (check_mases(map, flag) == 1 || check_empty_lines(map, &(*cub3d)) == 1)
 		return (1);
 	return (0);
 }
