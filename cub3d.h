@@ -6,13 +6,13 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/26 19:45:27 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:40:25 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include "mlx/mlx.h"
+# include <mlx.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include "libft/libft.h"
@@ -54,7 +54,7 @@ typedef struct s_cub3d
 	char	**map;
 }			t_cub3d;
 
-typedef struct	s_coord
+typedef struct s_coord
 {
 	int	row;
 	int	col;

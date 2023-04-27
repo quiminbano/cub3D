@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 18:40:31 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/22 11:59:10 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:37:59 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	check_floor_celling(char **array, t_cub3d *img)
 {
 	int	c;
 	int	f;
-	int len;
+	int	len;
 
 	c = ft_find_word_array(array, "C");
 	f = ft_find_word_array(array, "F");

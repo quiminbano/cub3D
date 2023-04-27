@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 11:22:46 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/22 12:34:04 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:36:39 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	print_error(int error)
 		write(STDERR_FILENO, " or the file does not exist\n", 28);
 	}
 	else if (error == TEXTURES_MISSING)
-		write(STDERR_FILENO, "One or more of the wall textures is missing\n", 44);
+		write(STDERR_FILENO, "One or more of wall textures is missing\n", 44);
 	else if (error == WRONG_INPUT)
 		write(STDERR_FILENO, "Invalid map format\n", 19);
 	else if (error == TEXTURES_MISSING)

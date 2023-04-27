@@ -6,13 +6,13 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 15:37:35 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/22 12:16:31 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:39:34 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_cub3d	cub3d;
 
