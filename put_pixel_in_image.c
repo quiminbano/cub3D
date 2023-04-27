@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_events.c                                     :+:      :+:    :+:   */
+/*   put_pixel_in_image.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 11:13:19 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 15:22:52 by corellan         ###   ########.fr       */
+/*   Created: 2023/04/20 13:53:16 by tpoho             #+#    #+#             */
+/*   Updated: 2023/04/27 15:32:32 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	destroy(t_cub3d *cub3d)
+void	put_pixel_in_image(t_cub3d *cub3d, int x, int y, int colour)
 {
-	mlx_destroy_image(cub3d->mlx.mlx, cub3d->ptr_no);
-	mlx_destroy_image(cub3d->mlx.mlx, cub3d->ptr_so);
-	mlx_destroy_image(cub3d->mlx.mlx, cub3d->ptr_ea);
-	mlx_destroy_image(cub3d->mlx.mlx, cub3d->ptr_we);
-	mlx_destroy_window(cub3d->mlx.mlx, cub3d->mlx.mlx_window);
-	cub3d->mlx.mlx = NULL;
-	cub3d->mlx.mlx_window = NULL;
-	exit(0);
+	char	*pixel;
+
+	if (cub3d->which_image == 0)
+		pixel = cub3d->image_1.address;
+	else
+		pixel = cub3d->image_2.address;
+	if (x >= 0 && x < WIDTH_WINDOW && y >= 0 && y < HEIGHT_WINDOW)
+	{
+		pixel = pixel + (y * cub3d->image_1.line_length
+				+ (x * (cub3d->put_pixel_in_image_temp)));
+		*(unsigned int *) pixel = colour;
+	}
 }
