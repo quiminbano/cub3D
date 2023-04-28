@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:55:11 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/28 13:57:56 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:46:06 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,23 @@ static void map_initialization(int ac, char **av, t_cub3d *cub3d)
 	create_int_map(cub3d);
 }
 
+void	initial_orientation(t_cub3d *cub3d)
+{
+	double	temp_direction_x;
+	double	temp_camera_plane_x;
+
+	temp_direction_x = cub3d->player_direction_x;
+	cub3d->player_direction_x = cub3d->player_direction_x * cos(cub3d->starting_angle)
+		- cub3d->player_direction_y * sin(cub3d->starting_angle);
+	cub3d->player_direction_y = temp_direction_x * sin(cub3d->starting_angle)
+		+ cub3d->player_direction_y * cos(cub3d->starting_angle);
+	temp_camera_plane_x = cub3d->camera_plane_x;
+	cub3d->camera_plane_x = cub3d->camera_plane_x * cos(cub3d->starting_angle)
+		- cub3d->camera_plane_y * sin(cub3d->starting_angle);
+	cub3d->camera_plane_y = temp_camera_plane_x * sin(cub3d->starting_angle)
+		+ cub3d->camera_plane_y * cos(cub3d->starting_angle);
+}
+
 void	initialization(int argc, char **argv, t_cub3d *cub3d)
 {
 	map_initialization(argc, argv, &(*cub3d));
@@ -79,14 +96,8 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->render_walls.wall_height = 0;
 	cub3d->render_walls.draw_limit_low = 0;
 	cub3d->render_walls.draw_limit_high = 0;
-	//cub3d->player_position_x = 2.5;
-	//cub3d->player_position_y = 2.5;
-	//cub3d->player_direction_x = 0;
-	//cub3d->player_direction_y = 1;
 	cub3d->camera_plane_x = 0;
 	cub3d->camera_plane_y = 0.66;
-	//cub3d->height_map = 24;
-	//cub3d->width_map = 24;
 	cub3d->key_w_down = 0;
 	cub3d->key_a_down = 0;
 	cub3d->key_s_down = 0;
@@ -95,5 +106,6 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->key_arrow_down_down = 0;
 	cub3d->key_arrow_left_down = 0;
 	cub3d->key_arrow_right_down = 0;
+	initial_orientation(cub3d);
 	mlx_initialization(cub3d);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/28 14:07:05 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:12:23 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ typedef struct s_cub3d
 	int				colour_floor;
 	int				colour_wall;
 	int				colour_wall2;
-	int				starting_angle;
+	double			starting_angle;
 	double			player_position_x;
 	double			player_position_y;
 	double			player_direction_x;
