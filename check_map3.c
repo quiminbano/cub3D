@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 18:04:00 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 15:11:01 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/28 12:30:23 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,24 @@ int	check_after_flood_fill(char ***map)
 	if (flag == 1)
 		return (1);
 	return (0);
+}
+
+void	flood_fill(char ***temp, t_coord *id, int ro, int co)
+{
+	if (ro >= id->row || co >= id->col)
+		return ;
+	if (ro < 0 || co < 0)
+		return ;
+	if ((*temp)[ro][co] == ' ' || (*temp)[ro][co] == '\0')
+		return ;
+	if ((*temp)[ro][co] == 'N' || (*temp)[ro][co] == 'S' || \
+		(*temp)[ro][co] == 'E' || (*temp)[ro][co] == 'W' || \
+		(*temp)[ro][co] == '1' || (*temp)[ro][co] == '0')
+	{
+		(*temp)[ro][co] = '3';
+		flood_fill(&(*temp), &(*id), (ro - 1), co);
+		flood_fill(&(*temp), &(*id), (ro + 1), co);
+		flood_fill(&(*temp), &(*id), ro, (co - 1));
+		flood_fill(&(*temp), &(*id), ro, (co + 1));
+	}
 }

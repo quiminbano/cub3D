@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:55:11 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/27 19:52:29 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/28 13:57:56 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,8 @@ static void map_initialization(int ac, char **av, t_cub3d *cub3d)
 
 void	initialization(int argc, char **argv, t_cub3d *cub3d)
 {
-	printf("Begin Initialization\n");
 	map_initialization(argc, argv, &(*cub3d));
 	cub3d->which_image = 0;
-	cub3d->colour_ceiling = 0x000000FF;
-	cub3d->colour_floor = 0x0000FF00;
 	cub3d->colour_wall = 0x00FF0000;
 	cub3d->colour_wall2 = cub3d->colour_wall / 2;
 	cub3d->render_walls.ray_coordinate_in_camera_plane = 0;
@@ -82,10 +79,10 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->render_walls.wall_height = 0;
 	cub3d->render_walls.draw_limit_low = 0;
 	cub3d->render_walls.draw_limit_high = 0;
-	cub3d->player_position_x = 2.5;
-	cub3d->player_position_y = 2.5;
-	cub3d->player_direction_x = -1;
-	cub3d->player_direction_y = 0;
+	//cub3d->player_position_x = 2.5;
+	//cub3d->player_position_y = 2.5;
+	//cub3d->player_direction_x = 0;
+	//cub3d->player_direction_y = 1;
 	cub3d->camera_plane_x = 0;
 	cub3d->camera_plane_y = 0.66;
 	//cub3d->height_map = 24;
@@ -98,18 +95,5 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->key_arrow_down_down = 0;
 	cub3d->key_arrow_left_down = 0;
 	cub3d->key_arrow_right_down = 0;
-	int i = 0;
-	int j = 0;
-	while (i < cub3d->height_map)
-	{
-		j = 0;
-		while (j < cub3d->width_map)
-		{
-			printf("%d", cub3d->map_int[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
 	mlx_initialization(cub3d);
 }

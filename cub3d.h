@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 18:09:43 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:07:05 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_cub3d
 	int				colour_floor;
 	int				colour_wall;
 	int				colour_wall2;
+	int				starting_angle;
 	double			player_position_x;
 	double			player_position_y;
 	double			player_direction_x;
@@ -186,7 +187,7 @@ int		check_floor_ceiling(char **array, t_cub3d *img);
 int		check_valid_number(char const *str);
 int		check_is_number(char *str);
 int		check_map(char **map, t_cub3d *cub3d);
-int		check_mases(char **map, int flag);
+int		check_mases(char **map, int flag, t_cub3d *cub3d);
 int		check_empty_lines(char **map, t_cub3d *cub3d);
 int		ft_find_word_array(char **array, char *needle);
 int		ft_array_len(char **array);
@@ -197,5 +198,6 @@ int		error_free(char **array, int i);
 int		check_after_flood_fill(char ***map);
 void	create_int_map(t_cub3d *cub3d);
 int		error_free_int(int **array, int i);
+void	flood_fill(char ***temp, t_coord *id, int ro, int co);
 
 #endif

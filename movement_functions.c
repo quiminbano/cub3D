@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 13:48:53 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/27 19:59:37 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/28 10:29:51 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	strafe_left(t_cub3d *cub3d)
 		+ (-cub3d->camera_plane_y * MOVEMENT_SPEED * 1.5))] == 0)
 		cub3d->player_position_y
 			+= (-cub3d->camera_plane_y * MOVEMENT_SPEED * 1.5);
-	printf("I move to the left\n");
 }
 
 void	strafe_right(t_cub3d *cub3d)

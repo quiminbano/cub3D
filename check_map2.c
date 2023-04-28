@@ -6,33 +6,25 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:18:43 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/26 19:45:18 by corellan         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:07:30 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	flood_fill(char ***temp, t_coord *id, int ro, int co)
+static void	establish_direction(char ***temp, t_coord *id, t_cub3d *cub3d)
 {
-	if (ro >= id->row || co >= id->col)
-		return ;
-	if (ro < 0 || co < 0)
-		return ;
-	if ((*temp)[ro][co] == ' ' || (*temp)[ro][co] == '\0')
-		return ;
-	if ((*temp)[ro][co] == 'N' || (*temp)[ro][co] == 'S' || \
-		(*temp)[ro][co] == 'E' || (*temp)[ro][co] == 'W' || \
-		(*temp)[ro][co] == '1' || (*temp)[ro][co] == '0')
-	{
-		(*temp)[ro][co] = '3';
-		flood_fill(&(*temp), &(*id), (ro - 1), co);
-		flood_fill(&(*temp), &(*id), (ro + 1), co);
-		flood_fill(&(*temp), &(*id), ro, (co - 1));
-		flood_fill(&(*temp), &(*id), ro, (co + 1));
-	}
+	if ((*temp)[id->i][id->j] == 'N')
+		cub3d->starting_angle = 0;
+	else if ((*temp)[id->i][id->j] == 'S')
+		cub3d->starting_angle = PI;
+	else if ((*temp)[id->i][id->j] == 'E')
+		cub3d->starting_angle = ((3 * PI) / 2);
+	else if ((*temp)[id->i][id->j] == 'W')
+		cub3d->starting_angle = (PI / 2);
 }
 
-static int	find_player(char ***temp, t_coord *id)
+static int	find_player(char ***temp, t_coord *id, t_cub3d *cub3d)
 {
 	id->j = 0;
 	while ((*temp)[id->i][id->j] != '\0')
@@ -42,6 +34,11 @@ static int	find_player(char ***temp, t_coord *id)
 		{
 			id->i_row = id->i;
 			id->j_col = id->j;
+			cub3d->player_position_x = (double)id->i + 0.5;
+			cub3d->player_position_y = (double)id->j + 0.5;
+			cub3d->player_direction_x = -1;
+			cub3d->player_direction_y = 0;
+			establish_direction(&(*temp), &(*id), &(*cub3d));
 			return (1);
 		}
 		(id->j)++;
@@ -49,7 +46,7 @@ static int	find_player(char ***temp, t_coord *id)
 	return (0);
 }
 
-static int	find_start(char ***temp, int rows, int cols)
+static int	find_start(char ***temp, int rows, int cols, t_cub3d *cub3d)
 {
 	t_coord	idx;
 
@@ -60,7 +57,7 @@ static int	find_start(char ***temp, int rows, int cols)
 	idx.i = 0;
 	while ((*temp)[idx.i] != NULL)
 	{
-		if (find_player(&(*temp), &idx) == 1)
+		if (find_player(&(*temp), &idx, cub3d) == 1)
 			break ;
 		(idx.i)++;
 	}
@@ -75,14 +72,14 @@ static int	find_start(char ***temp, int rows, int cols)
 	return (0);
 }
 
-static int	copy_rectangle(char ***temp, char **map, int rows, int cols)
+static int	copy_rectangle(char ***temp, char **map, t_cub3d *cub3d)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < rows)
+	while (i < cub3d->height_map)
 	{
 		j = 0;
 		while (map[i][j] != '\0')
@@ -90,7 +87,7 @@ static int	copy_rectangle(char ***temp, char **map, int rows, int cols)
 			(*temp)[i][j] = map[i][j];
 			j++;
 		}
-		while (j < cols)
+		while (j < cub3d->width_map)
 		{
 			(*temp)[i][j] = ' ';
 			j++;
@@ -98,14 +95,12 @@ static int	copy_rectangle(char ***temp, char **map, int rows, int cols)
 		(*temp)[i][j] = '\0';
 		i++;
 	}
-	return (find_start(&(*temp), rows, cols));
+	return (find_start(&(*temp), cub3d->height_map, cub3d->width_map, cub3d));
 }
 
-int	check_mases(char **map, int flag)
+int	check_mases(char **map, int flag, t_cub3d *cub3d)
 {
 	char	**temp;
-	int		n_row;
-	int		n_col;
 	int		i;
 
 	if (flag == 0)
@@ -113,19 +108,19 @@ int	check_mases(char **map, int flag)
 		print_error(INVALID_MAP);
 		return (1);
 	}
-	n_row = ft_array_len(map);
+	cub3d->height_map = ft_array_len(map);
 	i = 0;
-	n_col = longest_length(map);
-	temp = (char **)malloc(sizeof(char *) * (n_row + 1));
+	cub3d->width_map = longest_length(map);
+	temp = (char **)malloc(sizeof(char *) * (cub3d->height_map + 1));
 	if (temp == NULL)
 		return (1);
-	temp[n_row] = NULL;
-	while (i < n_row)
+	temp[cub3d->height_map] = NULL;
+	while (i < cub3d->height_map)
 	{
-		temp[i] = (char *)malloc(sizeof(char) * (n_col + 1));
+		temp[i] = (char *)malloc(sizeof(char) * (cub3d->width_map + 1));
 		if (temp[i] == NULL)
 			return (error_free(temp, i));
 		i++;
 	}
-	return (copy_rectangle(&temp, map, n_row, n_col));
+	return (copy_rectangle(&temp, map, cub3d));
 }

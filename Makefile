@@ -6,12 +6,11 @@
 #    By: corellan <corellan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 10:54:50 by corellan          #+#    #+#              #
-#    Updated: 2023/04/27 19:37:54 by corellan         ###   ########.fr        #
+#    Updated: 2023/04/28 11:46:37 by corellan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
-
 
 SRCS = main.c cub3d_events.c cub3d_key_events.c check_arguments.c \
 check_file_map.c utils.c check_textures.c check_floor_ceiling.c check_map.c \
