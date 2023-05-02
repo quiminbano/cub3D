@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/28 14:12:23 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/02 18:03:27 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,14 @@ typedef struct s_cub3d
 	char			*ea_path;
 	char			*we_path;
 	void			*ptr_no;
+	int				no_height;
+	int				no_width;
+	int				so_height;
+	int				so_width;
+	int				ea_height;
+	int				ea_width;
+	int				we_height;
+	int				we_width;
 	void			*ptr_so;
 	void			*ptr_ea;
 	void			*ptr_we;
@@ -199,5 +207,6 @@ int		check_after_flood_fill(char ***map);
 void	create_int_map(t_cub3d *cub3d);
 int		error_free_int(int **array, int i);
 void	flood_fill(char ***temp, t_coord *id, int ro, int co);
+void	ft_free_int(int **array, int height);
 
 #endif

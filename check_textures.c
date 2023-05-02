@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 12:51:27 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/28 14:43:06 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/02 17:51:36 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ static char	*get_path_textures(char **file, int idx)
 
 int	check_textures(char **file, t_cub3d *cub)
 {
-	int	width;
-	int	height;
-
 	cub->no_path = get_path_textures(file, cub->idx_no);
 	cub->so_path = get_path_textures(file, cub->idx_so);
 	cub->ea_path = get_path_textures(file, cub->idx_ea);
@@ -70,13 +67,13 @@ int	check_textures(char **file, t_cub3d *cub)
 	if (check_null_or_free(cub, file, 1) == 1)
 		return (1);
 	cub->ptr_no = mlx_xpm_file_to_image(cub->mlx.mlx, cub->no_path, \
-		&width, &height);
+		&(cub->no_width), &(cub->no_height));
 	cub->ptr_so = mlx_xpm_file_to_image(cub->mlx.mlx, cub->so_path, \
-		&width, &height);
+		&(cub->so_width), &(cub->so_height));
 	cub->ptr_ea = mlx_xpm_file_to_image(cub->mlx.mlx, cub->ea_path, \
-		&width, &height);
+		&(cub->ea_width), &(cub->ea_height));
 	cub->ptr_we = mlx_xpm_file_to_image(cub->mlx.mlx, cub->we_path, \
-		&width, &height);
+		&(cub->we_width), &(cub->we_height));
 	if (check_null_or_free(&(*cub), file, 2) == 1)
 		return (1);
 	check_null_or_free(&(*cub), file, 3);

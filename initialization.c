@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:55:11 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/28 14:46:06 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/02 17:39:39 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void map_initialization(int ac, char **av, t_cub3d *cub3d)
 		exit (EXIT_FAILURE);
 	}
 	create_int_map(cub3d);
+	ft_free_split(cub3d->file);
+	ft_free_split(cub3d->map);
 }
 
 void	initial_orientation(t_cub3d *cub3d)
