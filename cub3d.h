@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/04 18:55:03 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/04 19:32:51 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include "libft/libft.h"
+
 # define NO_INPUT 1
 # define MANY_ARG 2
 # define WRONG_FORMAT 3
