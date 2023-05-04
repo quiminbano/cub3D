@@ -6,7 +6,7 @@
 #    By: corellan <corellan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 10:54:50 by corellan          #+#    #+#              #
-#    Updated: 2023/04/28 11:46:37 by corellan         ###   ########.fr        #
+#    Updated: 2023/05/04 16:55:15 by corellan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,14 @@ check_file_map.c utils.c check_textures.c check_floor_ceiling.c check_map.c \
 check_map2.c utils2.c error.c check_map3.c initialization.c game_loop.c \
 render_functions.c put_pixel_in_image.c movement_functions.c \
 movement_functions_2.c draw_window.c digital_differential_analyzer.c \
-render_functions_helpers.c create_int_map.c
+render_functions_helpers.c create_int_map.c process_textures.c
 
 OBJS = main.o cub3d_events.o cub3d_key_events.o check_arguments.o \
 check_file_map.o utils.o check_textures.o check_floor_ceiling.o check_map.o \
 check_map2.o utils2.o error.o check_map3.o initialization.o game_loop.o \
 render_functions.o put_pixel_in_image.o movement_functions.o \
 movement_functions_2.o draw_window.o digital_differential_analyzer.o \
-render_functions_helpers.o create_int_map.o
+render_functions_helpers.o create_int_map.o process_textures.o
 
 CC = cc
 
