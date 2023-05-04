@@ -6,11 +6,27 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 10:15:47 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/26 10:21:47 by corellan         ###   ########.fr       */
+/*   Updated: 2023/05/02 18:00:04 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_free_int(int **array, int height)
+{
+	int	i;
+
+	i = 0;
+	if (array == NULL)
+		return ;
+	while (i < height)
+	{
+		free(array[i]);
+		i++;
+	}
+	if (array != NULL)
+		free(array);
+}
 
 int	longest_length(char **map)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/04 14:20:42 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/04 15:41:00 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_image
 {
 	void	*image;
 	char	*address;
+	int		height_tex;
+	int		width_tex;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endianness;
@@ -98,6 +100,10 @@ typedef struct s_cub3d
 	t_mlx			mlx;
 	t_image			image_1;
 	t_image			image_2;
+	t_image			no_tex;
+	t_image			so_tex;
+	t_image			ea_tex;
+	t_image			we_tex;
 	t_render_walls	render_walls;
 	int				which_image;
 	int				colour_ceiling;
@@ -137,10 +143,6 @@ typedef struct s_cub3d
 	char			*so_path;
 	char			*ea_path;
 	char			*we_path;
-	void			*ptr_no;
-	void			*ptr_so;
-	void			*ptr_ea;
-	void			*ptr_we;
 	char			**file;
 }			t_cub3d;
 
@@ -202,5 +204,6 @@ int		check_after_flood_fill(char ***map);
 void	create_int_map(t_cub3d *cub3d);
 int		error_free_int(int **array, int i);
 void	flood_fill(char ***temp, t_coord *id, int ro, int co);
+void	ft_free_int(int **array, int height);
 
 #endif

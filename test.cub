@@ -1,7 +1,7 @@
-NO ./sims.xpm
-SO ./sims.xpm
-WE ./sims.xpm
-EA ./sims.xpm
+NO ./textures/green_hill1.xpm
+SO ./textures/green_hill1.xpm
+WE ./textures/green_hill2.xpm
+EA ./textures/green_hill2.xpm
 F 0,255,0
 C 0,0,255
 111111111111111111111111
