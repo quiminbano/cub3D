@@ -1,9 +1,15 @@
-NO ./textures/zelda1.xpm
-SO ./textures/green_hill1.xpm
-WE ./textures/zelda2.xpm
 EA ./textures/green_hill2.xpm
+
+NO ./textures/zelda1.xpm
+
+SO ./textures/green_hill1.xpm
+
+C 0,0,255         
+
+WE ./textures/zelda2.xpm
+
 F 0,255,0
-C 0,0,255
+
 111111111111111111111111
 100000000110000000000011
 100000000000000110000001
