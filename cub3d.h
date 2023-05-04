@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/04 15:41:00 by corellan         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:55:59 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ typedef struct s_cub3d
 	double			camera_plane_y;
 	int				texture_width;
 	int				texture_height;
-	int				textures[4][4096];
 	char			**map;
 	int				**map_int;
+	int				**textures;
 	int				width_map;
 	int				height_map;
 	int				put_pixel_in_image_temp;
@@ -205,5 +205,6 @@ void	create_int_map(t_cub3d *cub3d);
 int		error_free_int(int **array, int i);
 void	flood_fill(char ***temp, t_coord *id, int ro, int co);
 void	ft_free_int(int **array, int height);
+void	create_int_array_textures(t_cub3d *cub3d);
 
 #endif
