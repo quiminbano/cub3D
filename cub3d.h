@@ -44,7 +44,7 @@
 # define TURNING_SPEED 0.02
 
 # define KEY_ESC 53
-# define PLAYER_COLLISION_DISTANCE 0.01 
+# define PLAYER_COLLISION_DISTANCE 0.25 
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -117,6 +117,9 @@ typedef struct s_cub3d
 	double			player_direction_y;
 	double			camera_plane_x;
 	double			camera_plane_y;
+	int				texture_width;
+	int				texture_height;
+	int				textures[4][4096];
 	char			**map;
 	int				**map_int;
 	int				width_map;
