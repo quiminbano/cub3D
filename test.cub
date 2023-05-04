@@ -1,6 +1,6 @@
-NO ./textures/green_hill1.xpm
+NO ./textures/zelda1.xpm
 SO ./textures/green_hill1.xpm
-WE ./textures/green_hill2.xpm
+WE ./textures/zelda2.xpm
 EA ./textures/green_hill2.xpm
 F 0,255,0
 C 0,0,255

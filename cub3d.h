@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/04 16:55:59 by corellan         ###   ########.fr       */
+/*   Updated: 2023/05/04 18:55:03 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 typedef struct s_mlx
 {
 	void	*mlx;
-  	void	*mlx_window;
+	void	*mlx_window;
 }			t_mlx;
 
 typedef struct s_image
@@ -117,8 +117,6 @@ typedef struct s_cub3d
 	double			player_direction_y;
 	double			camera_plane_x;
 	double			camera_plane_y;
-	int				texture_width;
-	int				texture_height;
 	char			**map;
 	int				**map_int;
 	int				**textures;
@@ -135,7 +133,7 @@ typedef struct s_cub3d
 	int				key_arrow_right_down;	
 	int				fd;
 	char			***av_addr;
-  	int				idx_no;
+	int				idx_no;
 	int				idx_so;
 	int				idx_we;
 	int				idx_ea;
@@ -182,6 +180,19 @@ void	move_backward(t_cub3d *cub3d);
 void	turn_right(t_cub3d *cub3d);
 void	turn_left(t_cub3d *cub3d);
 
+int		return_texture_height(t_cub3d *cub3d, int nswe);
+int		return_texture_width(t_cub3d *cub3d, int nswe);
+
+double	insert_safety_movement_buffer(t_cub3d *cub3d, int x_or_y, int backward);
+double	insert_safety_movement_buffer_strafe(t_cub3d *cub3d,
+			int x_or_y, int backward);
+
+int		which_wall_side(t_cub3d *cub3d);
+int		relative_hight_texture(t_cub3d *cub3d, int y_coord, int nswe);
+double	exact_coord_x_for_wall(t_cub3d *cub3d);
+int		return_texture_width(t_cub3d *cub3d, int nswe);
+int		return_texture_height(t_cub3d *cub3d, int nswe);
+
 void	strafe_left(t_cub3d *cub3d);
 void	strafe_right(t_cub3d *cub3d);
 void	print_error(int error);
@@ -206,5 +217,6 @@ int		error_free_int(int **array, int i);
 void	flood_fill(char ***temp, t_coord *id, int ro, int co);
 void	ft_free_int(int **array, int height);
 void	create_int_array_textures(t_cub3d *cub3d);
+void	get_addr_textures(t_cub3d *cub3d);
 
 #endif
