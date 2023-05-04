@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:55:11 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/28 14:46:06 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/02 18:44:55 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,31 @@ void	initial_orientation(t_cub3d *cub3d)
 		+ cub3d->camera_plane_y * cos(cub3d->starting_angle);
 }
 
+void	create_textures(t_cub3d *cub3d)
+{
+	int	xorcolor;
+	int	ycolor;
+	int xycolor;
+
+	cub3d->texture_width = 64;
+	cub3d->texture_height = 64;
+	
+	for(int x = 0; x < cub3d->texture_width; x++)
+  	{
+		for(int y = 0; y < cub3d->texture_height; y++)
+ 	 	{
+			xorcolor = (x * 256 / cub3d->texture_width) ^ (y * 256 / cub3d->texture_height);
+    		//int xcolor = x * 256 / texWidth;
+    		ycolor = y * 256 / cub3d->texture_height;
+			xycolor = y * 128 / cub3d->texture_height + x * 128 / cub3d->texture_width;
+			cub3d->textures[0][cub3d->texture_width * y + x] = 65536 * 254 * (x != y && x != cub3d->texture_width - y); //flat tex black cross
+			cub3d->textures[1][cub3d->texture_width * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
+			cub3d->textures[2][cub3d->texture_width * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
+			cub3d->textures[3][cub3d->texture_width * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
+		}
+	}
+}
+
 void	initialization(int argc, char **argv, t_cub3d *cub3d)
 {
 	map_initialization(argc, argv, &(*cub3d));
@@ -107,5 +132,6 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->key_arrow_left_down = 0;
 	cub3d->key_arrow_right_down = 0;
 	initial_orientation(cub3d);
+	create_textures(cub3d);
 	mlx_initialization(cub3d);
 }
