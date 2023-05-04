@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 12:51:27 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/02 17:51:36 by corellan         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:52:16 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	check_null_or_free(t_cub3d *cub3d, char **file, int flag)
 		check_null_or_free(&(*cub3d), file, 3);
 		return (1);
 	}
-	if ((flag == 2) && (!cub3d->ptr_no || !cub3d->ptr_so || \
-		!cub3d->ptr_ea || !cub3d->ptr_we))
+	if ((flag == 2) && (!cub3d->no_tex.image || !cub3d->so_tex.image || \
+		!cub3d->ea_tex.image || !cub3d->we_tex.image))
 	{
 		print_error(TEXTURE_NOT_FOUND);
 		ft_free_split(file);
@@ -66,14 +66,14 @@ int	check_textures(char **file, t_cub3d *cub)
 	cub->we_path = get_path_textures(file, cub->idx_we);
 	if (check_null_or_free(cub, file, 1) == 1)
 		return (1);
-	cub->ptr_no = mlx_xpm_file_to_image(cub->mlx.mlx, cub->no_path, \
-		&(cub->no_width), &(cub->no_height));
-	cub->ptr_so = mlx_xpm_file_to_image(cub->mlx.mlx, cub->so_path, \
-		&(cub->so_width), &(cub->so_height));
-	cub->ptr_ea = mlx_xpm_file_to_image(cub->mlx.mlx, cub->ea_path, \
-		&(cub->ea_width), &(cub->ea_height));
-	cub->ptr_we = mlx_xpm_file_to_image(cub->mlx.mlx, cub->we_path, \
-		&(cub->we_width), &(cub->we_height));
+	cub->no_tex.image = mlx_xpm_file_to_image(cub->mlx.mlx, cub->no_path, \
+		&(cub->no_tex.width_tex), &(cub->no_tex.height_tex));
+	cub->so_tex.image = mlx_xpm_file_to_image(cub->mlx.mlx, cub->so_path, \
+		&(cub->so_tex.width_tex), &(cub->so_tex.height_tex));
+	cub->ea_tex.image = mlx_xpm_file_to_image(cub->mlx.mlx, cub->ea_path, \
+		&(cub->ea_tex.width_tex), &(cub->ea_tex.height_tex));
+	cub->we_tex.image = mlx_xpm_file_to_image(cub->mlx.mlx, cub->we_path, \
+		&(cub->we_tex.width_tex), &(cub->we_tex.height_tex));
 	if (check_null_or_free(&(*cub), file, 2) == 1)
 		return (1);
 	check_null_or_free(&(*cub), file, 3);

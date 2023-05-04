@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/02 18:03:27 by corellan         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:41:00 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_image
 {
 	void	*image;
 	char	*address;
+	int		height_tex;
+	int		width_tex;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endianness;
@@ -98,6 +100,10 @@ typedef struct s_cub3d
 	t_mlx			mlx;
 	t_image			image_1;
 	t_image			image_2;
+	t_image			no_tex;
+	t_image			so_tex;
+	t_image			ea_tex;
+	t_image			we_tex;
 	t_render_walls	render_walls;
 	int				which_image;
 	int				colour_ceiling;
@@ -134,18 +140,6 @@ typedef struct s_cub3d
 	char			*so_path;
 	char			*ea_path;
 	char			*we_path;
-	void			*ptr_no;
-	int				no_height;
-	int				no_width;
-	int				so_height;
-	int				so_width;
-	int				ea_height;
-	int				ea_width;
-	int				we_height;
-	int				we_width;
-	void			*ptr_so;
-	void			*ptr_ea;
-	void			*ptr_we;
 	char			**file;
 }			t_cub3d;
 
