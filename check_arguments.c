@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arguments.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 11:22:46 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/04 19:08:10 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/05 11:03:36 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_error(int error)
 		write(STDERR_FILENO, "One or more of wall textures is missing\n", 40);
 	else if (error == WRONG_INPUT)
 		write(STDERR_FILENO, "Invalid map format\n", 19);
-	else if (error == TEXTURES_MISSING)
+	else if (error == FLOOR_CELLING_MISSING)
 	{
 		write(STDERR_FILENO, "The color range to paint the ", 29);
 		write(STDERR_FILENO, "floor or the celling is missing\n", 32);
