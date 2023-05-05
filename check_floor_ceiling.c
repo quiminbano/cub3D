@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 18:40:31 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 16:37:49 by corellan         ###   ########.fr       */
+/*   Updated: 2023/05/05 15:38:47 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,34 @@ static int	play_with_bits(int i, int flag, int *colour, char **array)
 	return (0);
 }
 
+static int	check_empty_cealing_floor(char **array, int *colour)
+{
+	int	len;
+	int	len_str;
+	int	i;
+	int	sp;
+
+	len = ft_array_len(array);
+	if (len != 3)
+	{
+		ft_free_split(array);
+		print_error(WRONG_INPUT);
+		return (1);
+	}
+	i = 0;
+	while (array[i] != NULL)
+	{
+		len_str = ft_strlen(array[i]);
+		sp = ft_count_space(array[i]);
+		if (len_str == sp)
+			break ;
+		i++;
+	}
+	if (i < len)
+		return (play_with_bits(3, 1, &(*colour), array));
+	return (0);
+}
+
 static int	check_parameters(char **array, int *colour)
 {
 	int		i;
@@ -35,6 +63,8 @@ static int	check_parameters(char **array, int *colour)
 	i = 0;
 	flag = 0;
 	temp = NULL;
+	if (check_empty_cealing_floor(array, &(*colour)) == 1)
+		return (1);
 	while (array != NULL && array[i] != NULL)
 	{
 		temp = ft_split(array[i], ' ');
