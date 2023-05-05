@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:55:11 by tpoho             #+#    #+#             */
-/*   Updated: 2023/05/04 18:54:44 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/05 12:30:07 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	map_initialization(int ac, char **av, t_cub3d *cub3d)
 	ft_free_split(cub3d->map);
 }
 
-void	initial_orientation(t_cub3d *cub3d)
+static void	initial_orientation(t_cub3d *cub3d)
 {
 	double	temp_direction_x;
 	double	temp_camera_plane_x;
@@ -78,11 +78,9 @@ void	initial_orientation(t_cub3d *cub3d)
 		+ cub3d->camera_plane_y * cos(cub3d->starting_angle);
 }
 
-void	initialization_helper(t_cub3d *cub3d)
+static void	initialization_helper(t_cub3d *cub3d)
 {
 	cub3d->which_image = 0;
-	cub3d->colour_wall = 0x00FF0000;
-	cub3d->colour_wall2 = cub3d->colour_wall / 2;
 	cub3d->render_walls.ray_coordinate_in_camera_plane = 0;
 	cub3d->render_walls.ray_direction_x = 0;
 	cub3d->render_walls.ray_direction_y = 0;
@@ -112,8 +110,6 @@ void	initialization(int argc, char **argv, t_cub3d *cub3d)
 	cub3d->key_a_down = 0;
 	cub3d->key_s_down = 0;
 	cub3d->key_d_down = 0;
-	cub3d->key_arrow_up_down = 0;
-	cub3d->key_arrow_down_down = 0;
 	cub3d->key_arrow_left_down = 0;
 	cub3d->key_arrow_right_down = 0;
 	initial_orientation(cub3d);

@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 10:59:41 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/04 19:32:51 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/05 12:29:01 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # define HEIGHT_WINDOW_HALF 300
 
 # define PI 3.141592653589793238462643383279
-# define TWO_TIMES_PI 6.283185307179586476925286766559
 
 # define IN_THE_MIDDLE_OF_SQUARE 0.5
 # define EMPTY_SQUARE 0
@@ -43,9 +42,9 @@
 
 # define MOVEMENT_SPEED 0.04
 # define TURNING_SPEED 0.02
+# define PLAYER_COLLISION_DISTANCE 0.25
 
 # define KEY_ESC 53
-# define PLAYER_COLLISION_DISTANCE 0.25 
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -109,8 +108,6 @@ typedef struct s_cub3d
 	int				which_image;
 	int				colour_ceiling;
 	int				colour_floor;
-	int				colour_wall;
-	int				colour_wall2;
 	double			starting_angle;
 	double			player_position_x;
 	double			player_position_y;
@@ -128,8 +125,6 @@ typedef struct s_cub3d
 	int				key_a_down;
 	int				key_s_down;
 	int				key_d_down;
-	int				key_arrow_up_down;
-	int				key_arrow_down_down;
 	int				key_arrow_left_down;
 	int				key_arrow_right_down;	
 	int				fd;
@@ -178,6 +173,9 @@ void	compute_ray_distance_with_dda(t_cub3d *cub3d);
 void	move_forward(t_cub3d *cub3d);
 void	move_backward(t_cub3d *cub3d);
 
+void	strafe_left(t_cub3d *cub3d);
+void	strafe_right(t_cub3d *cub3d);
+
 void	turn_right(t_cub3d *cub3d);
 void	turn_left(t_cub3d *cub3d);
 
@@ -194,8 +192,6 @@ double	exact_coord_x_for_wall(t_cub3d *cub3d);
 int		return_texture_width(t_cub3d *cub3d, int nswe);
 int		return_texture_height(t_cub3d *cub3d, int nswe);
 
-void	strafe_left(t_cub3d *cub3d);
-void	strafe_right(t_cub3d *cub3d);
 void	print_error(int error);
 int		check_file_map(char **av, t_cub3d *cub3d);
 int		check_presence_textures(char **array, t_cub3d *cub3d);

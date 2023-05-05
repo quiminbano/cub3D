@@ -6,7 +6,7 @@
 #    By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 10:54:50 by corellan          #+#    #+#              #
-#    Updated: 2023/05/04 18:52:17 by tpoho            ###   ########.fr        #
+#    Updated: 2023/05/05 14:50:19 by tpoho            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ insert_safety_movement_buffer.o determine_texture_pixel_colours_helpers.o
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -O2
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g -static-libsan   #-O2 
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 

@@ -6,7 +6,7 @@
 /*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:48:48 by tpoho             #+#    #+#             */
-/*   Updated: 2023/05/04 18:53:32 by tpoho            ###   ########.fr       */
+/*   Updated: 2023/05/05 12:53:53 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,17 @@ double	exact_coord_x_for_wall(t_cub3d *cub3d)
 {
 	double	exact_wall_x_coord;
 
-	exact_wall_x_coord = cub3d->player_position_x
-		+ cub3d->render_walls.straight_wall_distance
-		* cub3d->render_walls.ray_direction_x;
 	if (cub3d->render_walls.which_side_hit == 0)
 	{
 		exact_wall_x_coord = cub3d->player_position_y
 			+ cub3d->render_walls.straight_wall_distance
 			* cub3d->render_walls.ray_direction_y;
+	}
+	else
+	{
+		exact_wall_x_coord = cub3d->player_position_x
+			+ cub3d->render_walls.straight_wall_distance
+			* cub3d->render_walls.ray_direction_x;
 	}
 	exact_wall_x_coord -= floor((exact_wall_x_coord));
 	return (exact_wall_x_coord);

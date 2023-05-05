@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 13:57:56 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/28 11:24:16 by corellan         ###   ########.fr       */
+/*   Updated: 2023/05/05 12:45:30 by tpoho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move_character(t_cub3d *cub3d)
+static void	move_character(t_cub3d *cub3d)
 {
 	if (cub3d->key_w_down == 1)
 		move_forward(cub3d);
