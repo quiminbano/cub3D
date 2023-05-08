@@ -6,7 +6,7 @@
 /*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:25:40 by corellan          #+#    #+#             */
-/*   Updated: 2023/04/27 16:37:29 by corellan         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:10:09 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ static int	get_map(t_cub3d *cub3d)
 	if (cub3d->map == NULL)
 		return (1);
 	cub3d->map[len] = NULL;
+	while (i < len)
+	{
+		cub3d->map[i] = ft_strdup(temp[i]);
+		i++;
+	}
 	if (len < 3)
 	{
 		if (len < 3 && len > 0)
@@ -73,11 +78,6 @@ static int	get_map(t_cub3d *cub3d)
 		else if (len == 0)
 			print_error(NO_MAP);
 		return (1);
-	}
-	while (i < len)
-	{
-		cub3d->map[i] = ft_strdup(temp[i]);
-		i++;
 	}
 	return (0);
 }
