@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tpoho <tpoho@student.42.fr>                +#+  +:+       +#+         #
+#    By: corellan <corellan@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/18 10:54:50 by corellan          #+#    #+#              #
-#    Updated: 2023/05/05 16:10:47 by tpoho            ###   ########.fr        #
+#    Updated: 2024/09/23 14:55:38 by corellan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,15 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-MLX = -lmlx -framework OpenGL -framework AppKit
+ifeq ($(shell uname -s), Darwin)
+	FOLDER = minilibx_macos
+	INCLUDE = -I. -I$(FOLDER)
+	MLX = -L$(FOLDER) -lmlx -framework OpenGL -framework AppKit
+else
+	FOLDER = minilibx_linux
+	INCLUDE = -I. -I/usr/bin -I$(FOLDER)
+	MLX = -L$(FOLDER) -lmlx -L/usr/lib -I$(FOLDER) -lXext -lX11 -lm -lz
+endif
 
 LIBFT = -Llibft -lft
 
@@ -40,10 +48,11 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(MAKE) -C ./libft
+	$(MAKE) -C ./$(FOLDER)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 
 %.o: %.c
-		$(CC) $(CFLAGS) -I. -c $< -o $@
+		$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	$(MAKE) clean -C ./libft
@@ -51,6 +60,7 @@ clean:
 
 fclean:	clean
 	$(MAKE) fclean -C ./libft
+	$(MAKE) clean -C ./$(FOLDER)
 	rm -f $(NAME)
 
 re:	fclean	all

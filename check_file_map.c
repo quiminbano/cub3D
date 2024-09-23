@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:25:40 by corellan          #+#    #+#             */
-/*   Updated: 2023/05/08 18:10:09 by corellan         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:16:43 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	check_file_map(char **av, t_cub3d *cub3d)
 		if (flag == 0)
 			doc = ft_strdup("");
 		if (str != NULL)
-			doc = ft_strjoin_free(doc, str);
+			doc = ft_strjoin_append(doc, str, ft_strlen(str));
 		flag = 1;
 	}
 	close(cub3d->fd);

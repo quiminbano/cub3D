@@ -1,0 +1,17 @@
+EA ./textures/green_hill2.xpm
+
+NO ./textures/zelda1.xpm
+
+SO ./textures/green_hill1.xpm
+
+C 0,0,255         
+
+WE ./textures/zelda2.xpm
+
+F 0,255,0 
+
+111111
+100101
+101001
+1100N1
+111111

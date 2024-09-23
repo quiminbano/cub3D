@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   digital_differential_analyzer.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: corellan <corellan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: corellan <corellan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:25:59 by tpoho             #+#    #+#             */
-/*   Updated: 2023/04/27 18:11:07 by corellan         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:56:43 by corellan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	compute_ray_distance_with_dda(t_cub3d *cub3d)
 		}
 		if (cub3d->map_int[cub3d->render_walls.player_which_map_cell_x]
 			[cub3d->render_walls.player_which_map_cell_y] > 0)
-				cub3d->render_walls.wall_hit = 1;
+			cub3d->render_walls.wall_hit = 1;
 	}
 	take_one_step_back_in_dda(cub3d);
 }
