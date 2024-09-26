@@ -11,6 +11,7 @@
 - Player movement (WASD) and camera rotation (left/right arrows)
 - Collision detection with walls
 - Configurable maps with textures, floor, and ceiling colors
+![cub3D1](https://github.com/user-attachments/assets/2a1e5eb4-edd2-415e-85a2-c83e78259439) ![cub3D2](https://github.com/user-attachments/assets/f0629142-41a1-46ce-ab48-88f77a4c4281)
 
 ## What do I need to try cub3D?
 
