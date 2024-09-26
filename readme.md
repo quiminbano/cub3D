@@ -43,7 +43,7 @@ make
 
 To execute the program you must pass an absolute or relative path to the map file. The map format is `.cub`. For example:
 ```bash
-./cub3D maps/oulu_kaupunki.cub`
+./cub3D maps/oulu_city.cub`
 ```
 
 ## How should a map look like?
@@ -67,7 +67,6 @@ A valid map should have the following structure:
 ### Example Map File
 
 ```
-R 1920 1080
 NO ./textures/north_texture.xpm
 SO ./textures/south_texture.xpm
 WE ./textures/west_texture.xpm
@@ -90,3 +89,8 @@ C 225,30,0
 
 This example demonstrates a simple map with a rectangular layout, enclosed by walls, and configuration settings for resolution, textures, and colors.
 
+## What kind of maps can I find in this repository?
+
+- brick_maze (`maps/brick_maze.cub`)
+- grafiti_maze (`maps/grafiti_maze.cub`)
+- oulu_city (`maps/oulu_city.cub`)
