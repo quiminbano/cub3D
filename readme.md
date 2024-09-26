@@ -92,5 +92,8 @@ This example demonstrates a simple map with a rectangular layout, enclosed by wa
 ## What kind of maps can I find in this repository?
 
 - brick_maze (`maps/brick_maze.cub`)
+![brick_cub3D](https://github.com/user-attachments/assets/7ec070bd-bc6d-4014-a480-dc1e9afcf981)
 - grafiti_maze (`maps/grafiti_maze.cub`)
+![grafiti_cub3D](https://github.com/user-attachments/assets/4609ae6b-f338-40e8-8c7a-48474e60e819)
 - oulu_city (`maps/oulu_city.cub`)
+![oulu_cub3D](https://github.com/user-attachments/assets/de2b8198-d33d-4255-9708-048051ab012e)
